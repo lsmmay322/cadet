@@ -6,7 +6,7 @@
 /*   By: hwalee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 16:46:56 by hwalee            #+#    #+#             */
-/*   Updated: 2020/10/06 17:03:20 by hwalee           ###   ########.fr       */
+/*   Updated: 2020/10/06 19:36:18 by hwalee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,15 @@ static int	ft_getrow(char const *s, char c)
 	return (size);
 }
 
+static int	ft_getcol(char const *s, char c)
+{
+	int i;
+
+	i = 0;
+	while (s[i] && !(s[i] == c))
+		i++;
+	return (i);
+}
 
 char	**ft_split(char const *s, char c)
 {
@@ -40,4 +49,16 @@ char	**ft_split(char const *s, char c)
 	i = 0;
 	if (!(str = (char **)malloc(sizeof(char *) * (ft_getrow(s, c) + 1))))
 		return (0);
-	while (
+	while (*s)
+	{
+		while (*s && (*s == c))
+			s++;
+		if (*s && !(*s == c))
+		{
+			str[i] = (char *)malloc(sizeof(char) * (ft_getcol(s, c)	+ 1));
+			while (*s && !(*s == c))
+				*str[i]++ = *s++;
+		}
+	}
+	return (str);
+}
