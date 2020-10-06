@@ -6,13 +6,14 @@
 /*   By: hwalee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 19:58:31 by hwalee            #+#    #+#             */
-/*   Updated: 2020/10/04 20:25:14 by hwalee           ###   ########.fr       */
+/*   Updated: 2020/10/05 21:45:43 by hwalee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-fndef LIBFT_H
-#define LIBfT_H
-#include <unistd.h>
+#ifndef LIBFT_H
+# define LIBFT_H
+# include <unistd.h>
+# include <stdlib.h>
 
 void	*ft_memset(void *str, int c, size_t n);
 void	ft_bzero(void *str, size_t n);
@@ -25,5 +26,21 @@ size_t	ft_strlen(const char *str);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
 char	*ft_strchr(const char *str, int c);
+char	*ft_strrchr(const char *str, int c);
+char	*ft_strnstr(const char *big, const char *little, size_t len);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_atoi(const char *nptr);
+int		ft_isalpha(int c);
+int		ft_isdigit(int c);
+int		ft_isalnum(int c);
+int		ft_isascii(int c);
+int		ft_isprint(int c);
+int		ft_toupper(int c);
+int		ft_tolower(int c);
+void	*ft_calloc(size_t nmemb, size_t size);
+char	*ft_strdup(const char *str);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strtrim(char const *s1, char const *set);
 
 #endif
