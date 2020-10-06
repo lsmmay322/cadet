@@ -6,7 +6,7 @@
 /*   By: hwalee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 21:35:40 by hwalee            #+#    #+#             */
-/*   Updated: 2020/10/05 21:44:23 by hwalee           ###   ########.fr       */
+/*   Updated: 2020/10/06 20:46:54 by hwalee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int size;
-	int i;
-	char *str;
+	int		size;
+	int		i;
+	char	*str;
 
 	i = 0;
 	size = ft_strlen(s1) + ft_strlen(s2);

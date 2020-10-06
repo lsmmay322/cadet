@@ -6,7 +6,7 @@
 /*   By: hwalee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 12:42:38 by hwalee            #+#    #+#             */
-/*   Updated: 2020/10/05 17:18:34 by hwalee           ###   ########.fr       */
+/*   Updated: 2020/10/06 20:46:26 by hwalee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,5 @@ char	*ft_strchr(const char *str, int c)
 		if (*str == cpy_c)
 			return ((char *)str);
 	}
-
 	return (0);
 }

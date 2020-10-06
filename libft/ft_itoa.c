@@ -1,27 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwalee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/05 21:20:15 by hwalee            #+#    #+#             */
-/*   Updated: 2020/10/06 20:50:21 by hwalee           ###   ########.fr       */
+/*   Created: 2020/10/06 20:53:48 by hwalee            #+#    #+#             */
+/*   Updated: 2020/10/06 21:01:42 by hwalee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+static int	ft_getlen(int n)
 {
-	char *str;
+	int size;
 
-	if (!s)
+	size = 0;
+	if (n < 0)
+	   	size++;
+	while (n)
+	{
+		n /= 10;
+		size++;
+	}
+	return (size + 1);
+}
+
+char		*ft_itoa(int n)
+{
+	int		size;
+	char	*str;
+	int		i;
+
+	i = 0;
+	size = ft_getlen(n);
+	if(!(str = (char *)malloc(sizeof(char) * size)))
 		return (0);
-	if (ft_strlen(s) < start)
-		return ("");
-	if (!(str = (char *)malloc(sizeof(char) * (len + 1))))
-		return (0);
-	ft_strlcpy(str, s + start, len + 1);
-	return (str);
+	str[size--] = '\0';
+	while(size)
+	{
+		str[size--] = n % 10 + '0';
+		n /= 10;
+	}
+	reutrn (str);
 }
