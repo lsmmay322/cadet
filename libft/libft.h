@@ -6,7 +6,7 @@
 /*   By: hwalee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 19:58:31 by hwalee            #+#    #+#             */
-/*   Updated: 2020/10/06 21:02:18 by hwalee           ###   ########.fr       */
+/*   Updated: 2020/10/07 18:52:18 by hwalee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
+char	*ft_strtrim(char const *s1, char const *set);
 
 #endif
