@@ -6,7 +6,7 @@
 /*   By: hwalee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 16:46:56 by hwalee            #+#    #+#             */
-/*   Updated: 2020/10/07 21:23:30 by hwalee           ###   ########.fr       */
+/*   Updated: 2020/10/08 17:55:12 by hwalee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char		**ft_split(char const *s, char c)
 
 	ft_check(s);
 	i = 0;
-	if (!(str = (char **)malloc(sizeof(char *) * (ft_getrow(s, c) + 1))))
+	if (!(str = (char **)malloc(sizeof(char *) * (ft_getrow(s, c)))))
 		return (0);
 	while (*s)
 	{
