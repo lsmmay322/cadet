@@ -6,7 +6,7 @@
 /*   By: hwalee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 19:04:49 by hwalee            #+#    #+#             */
-/*   Updated: 2020/10/07 21:15:13 by hwalee           ###   ########.fr       */
+/*   Updated: 2020/10/12 21:20:55 by hwalee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ int main()
     		check_strnstr("lorem ipsum dolor sit amet", "", 10);
 }
 */
+/*
 static void			ft_print_result(char const *s)
 {
 	int		len;
@@ -142,5 +143,15 @@ static void			check_split(char *s, char c)
 
 int main()
 {
-    check_split("          ", ' ');
+    check_split("         ", ' ');
+}
+*/
+
+int main()
+{
+	char *s = "     ";
+	char **c = ft_split(s, ' ');
+	int i = 0;
+	while (c[i])
+		printf("%s\n", c[i++]);
 }

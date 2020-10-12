@@ -6,7 +6,7 @@
 /*   By: hwalee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 16:46:56 by hwalee            #+#    #+#             */
-/*   Updated: 2020/10/08 17:55:12 by hwalee           ###   ########.fr       */
+/*   Updated: 2020/10/12 21:13:21 by hwalee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,13 @@ static int	ft_getrow(char const *s, char c)
 	size = 0;
 	while (*s)
 	{
-		while (*s && (*s == c))
-			s++;
 		if (*s && !(*s == c))
 		{
 			size++;
 			while (*s && !(*s == c))
 				s++;
 		}
+		s++;
 	}
 	return (size);
 }
@@ -41,44 +40,29 @@ static int	ft_getcol(char const *s, char c)
 	return (i);
 }
 
-static char	*ft_check(char const *s)
-{
-	int i;
-	char *str;
-
-	i = 0;
-	str = (char *)s;
-	while (str[i] && str[i] == ' ')
-	{
-		i++;
-	}
-	if (str[i] == '\0')
-		return (0);
-}	
-
 char		**ft_split(char const *s, char c)
 {
 	char	**str;
 	int		i;
 	int		j;
 
-	ft_check(s);
 	i = 0;
-	if (!(str = (char **)malloc(sizeof(char *) * (ft_getrow(s, c)))))
+	if (!(str = (char **)malloc(sizeof(char *) * (ft_getrow(s, c) + 1))))
 		return (0);
+	while (*s && (*s == c))
+		s++;
 	while (*s)
 	{
 		j = 0;
-		while (*s && (*s == c))
-			s++;
 		if (*s && !(*s == c))
 		{
 			str[i] = (char *)malloc(sizeof(char) * (ft_getcol(s, c) + 1));
 			while (*s && !(*s == c))
 				str[i][j++] = *s++;
 			str[i][j] = '\0';
+			i++;
 		}
-		i++;
+		s++;
 	}
 	str[i] = 0;
 	return (str);

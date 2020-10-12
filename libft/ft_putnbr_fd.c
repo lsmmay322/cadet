@@ -14,9 +14,9 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	char *ch;
-	unsigned int i;
-	unsigned int len;
+	char			*ch;
+	unsigned int	i;
+	unsigned int	len;
 
 	i = 0;
 	ch = ft_itoa(n);
@@ -26,4 +26,3 @@ void	ft_putnbr_fd(int n, int fd)
 	while (i < len)
 		write(fd, &ch[i++], 1);
 }
-	
