@@ -6,7 +6,7 @@
 #    By: hwalee <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/04 20:20:49 by hwalee            #+#    #+#              #
-#    Updated: 2020/10/11 23:44:26 by hwalee           ###   ########.fr        #
+#    Updated: 2020/10/13 22:16:24 by hwalee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ B_SRC = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c
 OBJS = $(SRC:.c=.o)
 B_OBJS = $(B_SRC:.c=.o)
 
-all : $(NAME) bonus
+all : $(NAME)
 
 $(NAME) : $(OBJS)
 	ar cr $(NAME) $(OBJS)
@@ -34,11 +34,11 @@ $(NAME) : $(OBJS)
 %.o : %.c libft.h
 	$(CC) $(CLFAGS) -c $< -o $@
 
-bonus : $(OBJS) $(B_OBJS)
-	ar cr $(NAME) $(OBJS) $(B_OBJS)
+bonus : $(B_OBJS)
+	ar cr $(NAME)  $(B_OBJS)
 
 clean :
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(B_OBJS)
 
 fclean :
 	rm -f $(NAME)

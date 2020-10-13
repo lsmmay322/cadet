@@ -6,7 +6,7 @@
 /*   By: hwalee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 21:46:08 by hwalee            #+#    #+#             */
-/*   Updated: 2020/10/07 19:15:50 by hwalee           ###   ########.fr       */
+/*   Updated: 2020/10/13 21:48:04 by hwalee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,16 @@ char		*ft_strtrim(char const *s1, char const *set)
 	int		front;
 	int		rear;
 
-	dest = (char *)malloc(sizeof(char) * ft_strlen(s1) + 1);
+	if (s1 == NULL)
+		return (0);
+	if (set == NULL)
+		return (ft_strdup(s1));
 	front = front_ind(s1, set);
 	rear = rear_ind(s1, set);
+	if (rear <= front)
+		return (ft_strdup(""));
+	if (!(dest = (char *)malloc(sizeof(char) * (rear - front + 1) + 1)))
+		return (0);
 	ft_strlcpy(dest, s1 + front, rear - front + 2);
 	return (dest);
 }
