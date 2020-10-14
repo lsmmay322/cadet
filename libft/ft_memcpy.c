@@ -6,7 +6,7 @@
 /*   By: hwalee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 20:22:09 by hwalee            #+#    #+#             */
-/*   Updated: 2020/10/13 20:51:37 by hwalee           ###   ########.fr       */
+/*   Updated: 2020/10/14 15:51:56 by hwalee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	unsigned char	*cpy_dest;
 	unsigned char	*cpy_src;
 
-	if (src == NULL)
+	if (dest == NULL && src == NULL)
 		return (NULL);
 	cpy_dest = dest;
 	cpy_src = (unsigned char *)src;

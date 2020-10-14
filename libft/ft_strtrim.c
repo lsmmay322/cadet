@@ -6,7 +6,7 @@
 /*   By: hwalee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 21:46:08 by hwalee            #+#    #+#             */
-/*   Updated: 2020/10/13 21:48:04 by hwalee           ###   ########.fr       */
+/*   Updated: 2020/10/14 20:19:30 by hwalee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	rear_ind(char const *s1, char const *set)
 
 	size = ft_strlen(s1);
 	size--;
-	while (s1[size] && check_word(s1[size], set))
+	while (size && check_word(s1[size], set))
 		size--;
 	return (size);
 }
@@ -59,9 +59,9 @@ char		*ft_strtrim(char const *s1, char const *set)
 		return (ft_strdup(s1));
 	front = front_ind(s1, set);
 	rear = rear_ind(s1, set);
-	if (rear <= front)
+	if (rear < front)
 		return (ft_strdup(""));
-	if (!(dest = (char *)malloc(sizeof(char) * (rear - front + 1) + 1)))
+	if (!(dest = (char *)malloc(sizeof(char) * (rear - front + 2))))
 		return (0);
 	ft_strlcpy(dest, s1 + front, rear - front + 2);
 	return (dest);
