@@ -6,7 +6,7 @@
 /*   By: hwalee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 13:38:37 by hwalee            #+#    #+#             */
-/*   Updated: 2020/10/27 21:19:57 by hwalee           ###   ########.fr       */
+/*   Updated: 2020/10/28 14:47:01 by hwalee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,23 @@ int	ft_findnl(char *str)
 	return (-1);
 }
 
-int	ft_put_line(char **backup, char **line, int ind_nl)
+int	ft_put_line(char **backup, char **line, int ind_nl, int sz)
 {
 	char	*tmp;
 	int		size;	
-	static int count = 1;
+
 	size = (ind_nl == -1) ? ft_strlen(*backup) : ind_nl;
-	//printf("size is %d\n", size);
 	(*backup)[size] = '\0';
 	if (size == 0)
-		*line = strdup("");
+		*line = ft_strdup("");
 	else
-		*line = strdup(*backup);
+		*line = ft_strdup(*backup);
 		
-//	printf("line is %s\n", *line);
-	if (ind_nl != -1 &&*(*backup + ind_nl + 1) != '\0')
+	if ((ind_nl != -1 &&*(*backup + ind_nl + 1) != '\0') || sz != 0) 
 	{
-		printf("this func called %d time\n", count++);
-		tmp = strdup((*backup) + (ind_nl + 1));
+		tmp = ft_strdup((*backup) + (ind_nl + 1));
 		free(*backup);
-		*backup = strdup(tmp);
+		*backup = ft_strdup(tmp);
 		free(tmp);
 		return (1);
 	}
@@ -63,6 +60,7 @@ int	get_next_line(int fd, char **line)
 	int			find_nl;
 	char		*tmp;
 
+	size = 1;
 	if (fd < 0 || line == 0 || OPEN_MAX < fd || BUFFER_SIZE <= 0)
 		return (-1);
 	if (!(buff = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
@@ -71,17 +69,13 @@ int	get_next_line(int fd, char **line)
 			(size = read(fd, buff, BUFFER_SIZE)) > 0)
 	{
 		buff[size] = '\0';
-	//	printf("buff is %s\n", buff);
 		if (backup[fd] == NULL)
-			backup[fd] = strdup("");
+			backup[fd] = ft_strdup("");
 		tmp = ft_strjoin(backup[fd], buff);
 		free(backup[fd]);
 		backup[fd] = tmp;
-	//	printf("back is %s\n", backup[fd]);
 	}
-	//printf("back is %s\n", backup[fd]);
-	//printf("nl is %d\n", find_nl);
 	free(buff);
 	buff = NULL;
-	return (ft_put_line(&backup[fd], line, find_nl));
+	return (ft_put_line(&backup[fd], line, find_nl, size));
 }

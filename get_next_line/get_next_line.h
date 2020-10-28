@@ -6,7 +6,7 @@
 /*   By: hwalee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 13:39:44 by hwalee            #+#    #+#             */
-/*   Updated: 2020/10/27 20:13:15 by hwalee           ###   ########.fr       */
+/*   Updated: 2020/10/28 14:23:33 by hwalee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <stdio.h>
 
 int		ft_findnl(char *str);
-int		ft_put_line(char **backup, char **line, int ind_nl);
+int		ft_put_line(char **backup, char **line, int ind_nl, int sz);
 int		get_next_line(int fd, char **line);
 void	ft_strlcpy(char **dest, char *src);
 char	*ft_strdup(char *s);
