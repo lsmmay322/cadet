@@ -6,12 +6,11 @@
 /*   By: hwalee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 13:38:37 by hwalee            #+#    #+#             */
-/*   Updated: 2020/10/28 14:47:01 by hwalee           ###   ########.fr       */
+/*   Updated: 2020/11/03 16:20:35 by hwalee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <string.h>
 
 int	ft_findnl(char *str)
 {
@@ -32,23 +31,27 @@ int	ft_findnl(char *str)
 int	ft_put_line(char **backup, char **line, int ind_nl, int sz)
 {
 	char	*tmp;
-	int		size;	
+	int		size;
 
-	size = (ind_nl == -1) ? ft_strlen(*backup) : ind_nl;
-	(*backup)[size] = '\0';
-	if (size == 0)
-		*line = ft_strdup("");
-	else
-		*line = ft_strdup(*backup);
-		
-	if ((ind_nl != -1 &&*(*backup + ind_nl + 1) != '\0') || sz != 0) 
+	if (ind_nl != -1 && sz != 0)
 	{
+		size = (ind_nl == -1) ? ft_strlen(*backup) : ind_nl;
+		(*backup)[size] = '\0';
+		*line = (size == 0) ? ft_strdup("") : ft_strdup(*backup);
 		tmp = ft_strdup((*backup) + (ind_nl + 1));
 		free(*backup);
 		*backup = ft_strdup(tmp);
 		free(tmp);
 		return (1);
 	}
+	else if (*backup != NULL && sz == 0)
+	{
+		*line = ft_strdup(*backup);
+		free(*backup);
+		*backup = NULL;
+	}
+	else
+		*line = ft_strdup("");
 	return (0);
 }
 
@@ -73,9 +76,10 @@ int	get_next_line(int fd, char **line)
 			backup[fd] = ft_strdup("");
 		tmp = ft_strjoin(backup[fd], buff);
 		free(backup[fd]);
-		backup[fd] = tmp;
+		backup[fd] = ft_strdup(tmp);
+		free(tmp);
 	}
 	free(buff);
 	buff = NULL;
-	return (ft_put_line(&backup[fd], line, find_nl, size));
+	return ((size < 0) ? -1 : ft_put_line(&backup[fd], line, find_nl, size));
 }
