@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwalee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/12 22:52:31 by hwalee            #+#    #+#             */
-/*   Updated: 2020/11/16 18:00:58 by hwalee           ###   ########.fr       */
+/*   Created: 2020/10/09 15:16:44 by hwalee            #+#    #+#             */
+/*   Updated: 2020/10/09 15:33:50 by hwalee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "ft_printf.h"
+#include "libft.h"
 
-int main()
+void	ft_putchar_fd(char c, int fd)
 {
-	int i = 1;
-	printf("1. %*d\n",3, i);
-	ft_printf("%d", 1);
-	printf("2. %.*d\n",5, i);
-	printf("3. %*.*d\n",3, 5, i);
-	printf("4. %*.*d\n", 5, 3, i);
-	printf("5. %*d\n",3, 1234);
-	printf("6. %.*d\n",3, 1234);
-	printf("7. %-*d\n", 6, 3);
-	printf("8. %0-*d\n", 6, 3);
-	printf("9. %0*d\n", 6, 3);
-	printf("10. %+ d\n", 1);
-	printf("11. %-.*d", 5, 6);
+	if (fd < 0)
+		return ;
+	write(fd, &c, 1);
 }

@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwalee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/12 22:52:31 by hwalee            #+#    #+#             */
-/*   Updated: 2020/11/16 18:00:58 by hwalee           ###   ########.fr       */
+/*   Created: 2020/10/11 22:05:02 by hwalee            #+#    #+#             */
+/*   Updated: 2020/10/11 23:40:34 by hwalee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "ft_printf.h"
+#include "libft.h"
 
-int main()
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	int i = 1;
-	printf("1. %*d\n",3, i);
-	ft_printf("%d", 1);
-	printf("2. %.*d\n",5, i);
-	printf("3. %*.*d\n",3, 5, i);
-	printf("4. %*.*d\n", 5, 3, i);
-	printf("5. %*d\n",3, 1234);
-	printf("6. %.*d\n",3, 1234);
-	printf("7. %-*d\n", 6, 3);
-	printf("8. %0-*d\n", 6, 3);
-	printf("9. %0*d\n", 6, 3);
-	printf("10. %+ d\n", 1);
-	printf("11. %-.*d", 5, 6);
+	t_list *curr;
+	t_list *next;
+
+	if (lst == 0 || del == 0)
+		return ;
+	curr = *lst;
+	while (curr)
+	{
+		next = curr->next;
+		ft_lstdelone(curr, del);
+		curr = next;
+	}
+	*lst = NULL;
 }

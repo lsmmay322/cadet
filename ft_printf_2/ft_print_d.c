@@ -16,45 +16,23 @@ static int	ft_size_str(char **str, t_list *tag, char *n)
 {
 	int	size;
 	
-	size = 0;
-	if ((tag -> width) != 0 || (tag -> prec) != 0)
-		size = ((tag -> width) > (tag -> prec)) ? width : prec;
-	if (ft_strlen(n) >= size)
-		size = ft_strlen(n);
-	if (!(*str = (char *)malloc(sizeof(char) * (size + 1)))
+	size = ft_strlen(n);
+	if (!(*str = (char *)malloc(sizeof(char) * (size + 1))))
 		return (ERROR);
 	return (SUCCESS);
 }
 
-static void	ft_d_flag(char **str, t_list *tag, va_list ap, char *n)
+static void ft_put_in_str(char **str, char *n)
 {
-	int i;
+    int i;
 
-	i = 0;
-	if (tag -> plus == EXEC)
-	{
-		if (ap < 0)
-			str = ft_strjoin("+", *str);
-		else
-			str = ft_strjoin("-", *str);
-	}
-	else if (tag -> plus != EXEC && tag -> space == EXEC)
-		if (ap < 0)
-			str = ft_strjoin("-", *str);
-	if (tag -> left == EXEC)
-		while (n[i])
-		{
-			(*str)[i] = n[i];
-			i++;
-		}
-		
-}
-
-static void	ft_d_prec(char **str, t_list *tag)
-{
-	int width;
-
-	width = tag -> width;
+    i = 0;
+    while (n[i] != '\0')
+    {
+        (*str)[i] = n[i];
+        i++;
+    }
+    *str[i] = '\0';
 }
 
 int			ft_print_d(t_list *tag, va_list ap)
@@ -63,11 +41,11 @@ int			ft_print_d(t_list *tag, va_list ap)
 	char	*str;
 	char	*n;
 
-	//if ((n = ft_itoa(va_arg(ap, int))) == 0)
-	//		return (ERROR);
-	//if (ft_size_str(&str, tag, n) == ERROR)
-	//	return (ERROR);
-	//ft_d_flag(&str, tag, ap, n);
+	if ((n = ft_itoa(va_arg(ap, int))) == 0)
+			return (ERROR);
+	if (ft_size_str(&str, tag, n) == ERROR)
+		return (ERROR);
+    ft_put_in_str(&str, n);
 	while (*str)
 	{
 		ft_putchar(*str);

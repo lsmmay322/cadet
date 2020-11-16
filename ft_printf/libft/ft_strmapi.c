@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwalee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/12 22:52:31 by hwalee            #+#    #+#             */
-/*   Updated: 2020/11/16 18:00:58 by hwalee           ###   ########.fr       */
+/*   Created: 2020/10/06 21:02:40 by hwalee            #+#    #+#             */
+/*   Updated: 2020/10/13 21:31:06 by hwalee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "ft_printf.h"
+#include "libft.h"
 
-int main()
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int i = 1;
-	printf("1. %*d\n",3, i);
-	ft_printf("%d", 1);
-	printf("2. %.*d\n",5, i);
-	printf("3. %*.*d\n",3, 5, i);
-	printf("4. %*.*d\n", 5, 3, i);
-	printf("5. %*d\n",3, 1234);
-	printf("6. %.*d\n",3, 1234);
-	printf("7. %-*d\n", 6, 3);
-	printf("8. %0-*d\n", 6, 3);
-	printf("9. %0*d\n", 6, 3);
-	printf("10. %+ d\n", 1);
-	printf("11. %-.*d", 5, 6);
+	char			*dest;
+	unsigned int	len;
+	unsigned int	i;
+
+	i = 0;
+	if (s == 0 || f == 0)
+		return (0);
+	len = ft_strlen(s);
+	if (!(dest = (char *)malloc(sizeof(char) * (len + 1))))
+		return (0);
+	while (i < len)
+	{
+		dest[i] = f(i, s[i]);
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }

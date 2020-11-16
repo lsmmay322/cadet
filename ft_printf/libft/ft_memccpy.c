@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwalee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/12 22:52:31 by hwalee            #+#    #+#             */
-/*   Updated: 2020/11/16 18:00:58 by hwalee           ###   ########.fr       */
+/*   Created: 2020/10/04 20:22:52 by hwalee            #+#    #+#             */
+/*   Updated: 2020/10/04 20:22:54 by hwalee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "ft_printf.h"
+#include "libft.h"
 
-int main()
+void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
 {
-	int i = 1;
-	printf("1. %*d\n",3, i);
-	ft_printf("%d", 1);
-	printf("2. %.*d\n",5, i);
-	printf("3. %*.*d\n",3, 5, i);
-	printf("4. %*.*d\n", 5, 3, i);
-	printf("5. %*d\n",3, 1234);
-	printf("6. %.*d\n",3, 1234);
-	printf("7. %-*d\n", 6, 3);
-	printf("8. %0-*d\n", 6, 3);
-	printf("9. %0*d\n", 6, 3);
-	printf("10. %+ d\n", 1);
-	printf("11. %-.*d", 5, 6);
+	unsigned char	*cpy_dest;
+	unsigned char	*cpy_src;
+	unsigned char	cpy_c;
+	size_t			i;
+
+	cpy_dest = dest;
+	cpy_src = (unsigned char *)src;
+	cpy_c = c;
+	i = 0;
+	while (i < n)
+	{
+		cpy_dest[i] = cpy_src[i];
+		if (cpy_src[i] == cpy_c)
+			return (dest + (i + 1));
+		i++;
+	}
+	return (0);
 }

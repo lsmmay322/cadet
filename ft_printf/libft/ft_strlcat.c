@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwalee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/12 22:52:31 by hwalee            #+#    #+#             */
-/*   Updated: 2020/11/16 18:00:58 by hwalee           ###   ########.fr       */
+/*   Created: 2020/10/04 20:24:13 by hwalee            #+#    #+#             */
+/*   Updated: 2020/10/04 20:24:14 by hwalee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "ft_printf.h"
+#include "libft.h"
 
-int main()
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	int i = 1;
-	printf("1. %*d\n",3, i);
-	ft_printf("%d", 1);
-	printf("2. %.*d\n",5, i);
-	printf("3. %*.*d\n",3, 5, i);
-	printf("4. %*.*d\n", 5, 3, i);
-	printf("5. %*d\n",3, 1234);
-	printf("6. %.*d\n",3, 1234);
-	printf("7. %-*d\n", 6, 3);
-	printf("8. %0-*d\n", 6, 3);
-	printf("9. %0*d\n", 6, 3);
-	printf("10. %+ d\n", 1);
-	printf("11. %-.*d", 5, 6);
+	size_t size_dest;
+	size_t size_src;
+	size_t i;
+
+	i = 0;
+	size_dest = ft_strlen(dest);
+	size_src = ft_strlen(src);
+	if (size <= size_dest)
+		return (size_src + size);
+	while (*dest)
+		dest++;
+	while (src[i] && i < (size - size_dest - 1))
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (size_dest + size_src);
 }

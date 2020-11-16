@@ -12,18 +12,20 @@
 
 #ifndef FT_PRINTF_H
 #define FT_PRINTF_H
-
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
+
 #define ERROR -1
 #define SUCCESS 0
 #define FAIL 0
+#define EXEC 1
+
+#define SPEC "cspdiuxX%"
 #define FLAG "-+ #0"
 #define WIDTH '*'
 #define PRECISION '.'
-#define EXEC 1
-#define SPEC "cspdiuxX%"
 
 typedef struct	s_list
 {
@@ -45,6 +47,9 @@ void	ft_precision(char **format, va_list ap, t_list *tag);
 
 int		ft_strchr_opt(char ch, char *str);
 int		ft_isnum(char **format);
+void    ft_putchar(char ch);
+size_t	ft_strlen(const char *str);
+char		*ft_itoa(int n);
 
 int		ft_print_d(t_list *tag, va_list ap);
 

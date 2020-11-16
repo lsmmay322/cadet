@@ -16,16 +16,20 @@
 int main()
 {
 	int i = 1;
+    printf("Hello World!\n");
+    printf("%d\n", 1);
+	printf("-------------------------------------\n");
 	printf("1. %*d\n",3, i);
-	ft_printf("%d", 1);
 	printf("2. %.*d\n",5, i);
 	printf("3. %*.*d\n",3, 5, i);
 	printf("4. %*.*d\n", 5, 3, i);
 	printf("5. %*d\n",3, 1234);
 	printf("6. %.*d\n",3, 1234);
 	printf("7. %-*d\n", 6, 3);
-	printf("8. %0-*d\n", 6, 3);
 	printf("9. %0*d\n", 6, 3);
-	printf("10. %+ d\n", 1);
-	printf("11. %-.*d", 5, 6);
+	printf("11. %-.*d\n", 5, 6);
+
+    printf("-------------------------------------\n");
+    ft_printf("Hello World!\n");
+    ft_printf("%d\n", 1);
 }
