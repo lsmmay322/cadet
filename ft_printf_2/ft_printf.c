@@ -14,44 +14,60 @@
 
 static void	ft_tag_init(t_list *tag)
 {
-	tag -> left = 0;
-	tag -> plus = 0;
-	tag -> space = 0;
-	tag -> shap = 0;
-	tag -> zero = 0;
-	tag -> width = 0;
-	tag -> prec = 0;
+	tag->left = 0;
+	tag->plus = 0;
+	tag->space = 0;
+	tag->shap = 0;
+	tag->zero = 0;
+	tag->width = 0;
+	tag->prec = 0;
+	tag->p_sign = 0;
 }
 
 static int	ft_specifier(char **format, t_list *tag, va_list ap)
 {
 	int res;
 
-	if (ft_strchr_opt(**format, SPEC) == ERROR)
+	if ((res = ft_strchr_opt(**format, SPEC)) == ERROR)
 		return (ERROR);
-    if (**format == 'd')
+	if (**format == 'd')
 		res = ft_print_d(tag, ap);
-    return (SUCCESS);
+	return (res);
 }
 
+static int	ft_format_tag(char **format, t_list *tag, va_list ap)
+{
+	if (**format == '\0')
+		return (ERROR);
+	ft_flag(format, tag);
+	if (**format == '\0')
+		return (ERROR);
+	ft_width(format, ap, tag);
+	if (**format == '\0')
+		return (ERROR);
+	ft_precision(format, ap, tag);
+	if (**format == '\0')
+		return (ERROR);
+	return (SUCCESS);
+}
 static int	ft_format(char *format, t_list *tag, va_list ap)
 {
-    char ch;
+	char ch;
 
 	if (format == NULL)
 		return (ERROR);
 	tag -> size = 0;
 	while (*format)
 	{
+		tag -> size++;
 		if (*format != '%')
-		{
-			tag -> size++;
 			ft_putchar(*format);
-		}
-        else
+		else
 		{
-            format++;
-            ft_tag_init(tag);
+			format++;
+			ft_tag_init(tag);
+			if (ft_format_tag(&format, tag, ap) == ERROR)
+				return (ERROR);
 			if (ft_specifier(&format, tag, ap) == ERROR)
 				return (ERROR);
 		}

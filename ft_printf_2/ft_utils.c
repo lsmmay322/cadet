@@ -28,17 +28,18 @@ int		ft_isnum(char **format)
 	int		res;
 
 	res = 0;
-	if (**format >= '0' && **format <= '9')
+	while (**format >= '0' && **format <= '9')
 	{
 		res = res * 10 + (**format - '0');
-		format++;
+		(*format)++;
 	}
 	return (res);
 }
 
-void    ft_putchar(char ch)
+int    ft_putchar(char ch)
 {
     write(1, &ch, 1);
+	return (1);
 }
 
 size_t	ft_strlen(const char *str)
@@ -100,3 +101,39 @@ char		*ft_itoa(int n)
 	return (str);
 }
 
+char	*ft_strdup(const char *str)
+{
+	int		i;
+	int		size;
+	char	*dest;
+
+	i = 0;
+	size = ft_strlen(str);
+	if (!(dest = (char *)malloc(sizeof(char) * size + 1)))
+		return (0);
+	while (i < size)
+	{
+		dest[i] = str[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	int		size;
+	int		i;
+	char	*str;
+
+	i = 0;
+	size = ft_strlen(s1) + ft_strlen(s2);
+	if (!(str = (char *)malloc(sizeof(char) * (size + 1))))
+		return (0);
+	while (*s1)
+		str[i++] = *s1++;
+	while (*s2)
+		str[i++] = *s2++;
+	str[i] = '\0';
+	return (str);
+}
