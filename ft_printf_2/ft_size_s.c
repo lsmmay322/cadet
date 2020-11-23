@@ -17,7 +17,7 @@ void		ft_size_s(char *s, t_list *tag)
 	int size;
 
 	size = ft_strlen(s);
-	if (size >= tag -> width)
+	if (size >= tag->width)
 		tag -> width = 0;
 	else
 		tag -> width -= size;

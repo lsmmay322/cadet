@@ -53,7 +53,7 @@ int		ft_putchar(char ch);
 size_t	ft_strlen(const char *str);
 char	*ft_itoa(int n);
 char	*ft_strdup(const char *str);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strnjoin(char const *s1, char const *s2, int n);
 
 int		ft_print_d(t_list *tag, va_list ap);
 int		ft_print_s(t_list *tag, va_list ap);

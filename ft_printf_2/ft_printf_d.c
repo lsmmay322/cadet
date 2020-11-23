@@ -17,7 +17,7 @@ static char	*ft_sign(int n, char *s, t_list *tag)
 	if (tag->plus == EXEC)
 	{
 		if (n >= 0)
-			s = ft_strjoin("+", s);
+			s = ft_strnjoin("+", s, 1);
 	}
 	else
 	{
