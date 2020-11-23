@@ -11,17 +11,17 @@
 # **************************************************************************** #
 
 CC = gcc
-NAME = a.out
+NAME = libftprintf.a
 CFALGS = -Wall -Werror -Wextra
-SRC = main.c ft_printf.c ft_printf_d.c ft_utils.c ft_size.c \
-	  ft_tag.c
+SRC = ft_printf.c ft_printf_d.c ft_utils.c ft_size_d.c \
+	  ft_tag.c ft_printf_s.c ft_size_s.c ft_printf_c.c
 
 OBJS = $(SRC:.c=.o)
 
-all : $(NAME);
+all : $(NAME)
 
 $(NAME) : $(OBJS)
-	$(CC) -o $@ $(OBJS)
+	ar cr $@ $(OBJS)
 
 %.o : %.c ft_printf.h
 	$(CC) $(CFLAGS) -c $< -o $@

@@ -39,7 +39,6 @@ typedef struct	s_list
 	int	width;
 	int prec;
 	int p_sign;
-	int p_len;
 }				t_list;
 
 int		ft_printf(const char *format, ...);
@@ -50,13 +49,16 @@ void	ft_precision(char **format, va_list ap, t_list *tag);
 
 int		ft_strchr_opt(char ch, char *str);
 int		ft_isnum(char **format);
-int    ft_putchar(char ch);
+int		ft_putchar(char ch);
 size_t	ft_strlen(const char *str);
 char	*ft_itoa(int n);
 char	*ft_strdup(const char *str);
 char	*ft_strjoin(char const *s1, char const *s2);
 
 int		ft_print_d(t_list *tag, va_list ap);
-void		ft_size_d(char *s, t_list *tag, int n);
+int		ft_print_s(t_list *tag, va_list ap);
+int		ft_print_c(t_list *tag, va_list ap);
+void	ft_size_d(char *s, t_list *tag, int n);
+void	ft_size_s(char *s, t_list *tag);
 
 #endif

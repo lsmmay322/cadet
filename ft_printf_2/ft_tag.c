@@ -63,13 +63,17 @@ void	ft_precision(char **format, va_list ap, t_list *tag)
 			tag->prec = va_arg(ap, int);
 			if (tag->prec < 0)
 			{
-				tag->left = EXEC;
-				tag->prec *= -1;
+				tag->prec = 0;
+				tag->p_sign = 0;
 			}
+			else
+				tag->p_sign = EXEC;
 			(*format)++;
 		}
 		else
+		{
 			tag->prec = ft_isnum(format);
-		tag->p_sign = EXEC;
+			tag->p_sign = EXEC;
+		}
 	}
 }

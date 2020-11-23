@@ -22,6 +22,7 @@ static void	ft_tag_init(t_list *tag)
 	tag->width = 0;
 	tag->prec = 0;
 	tag->p_sign = 0;
+	tag->z_sign = 0;
 }
 
 static int	ft_specifier(char **format, t_list *tag, va_list ap)
@@ -30,8 +31,13 @@ static int	ft_specifier(char **format, t_list *tag, va_list ap)
 
 	if ((res = ft_strchr_opt(**format, SPEC)) == ERROR)
 		return (ERROR);
-	if (**format == 'd')
+	if (**format == 'd' || **format == 'i')
 		res = ft_print_d(tag, ap);
+	if (**format == 's')
+		res = ft_print_s(tag, ap);
+	if (**format == 'c')
+		res = ft_print_c(tag, ap);
+
 	return (res);
 }
 
@@ -59,9 +65,8 @@ static int	ft_format(char *format, t_list *tag, va_list ap)
 	tag -> size = 0;
 	while (*format)
 	{
-		tag -> size++;
 		if (*format != '%')
-			ft_putchar(*format);
+			tag->size +=ft_putchar(*format);
 		else
 		{
 			format++;

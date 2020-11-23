@@ -12,76 +12,36 @@
 
 #include "ft_printf.h"
 
-static char	*ft_sign(int n, char *s, t_list *tag)
-{
-	if (tag->plus == EXEC)
-	{
-		if (n >= 0)
-			s = ft_strjoin("+", s);
-	}
-	else
-	{
-		if (tag->space == EXEC && n >= 0)
-			tag->size += ft_putchar(' ');
-	}
-	return (s);
-}
-
 static void	ft_print(char *s, t_list *tag)
 {
-	if (*s == '+' || *s == '-')
-		tag->size += ft_putchar(*s++);
-	if (tag->left != EXEC)
+	while (*s && tag->prec)
 	{
-		while (tag->zero > 0)
-		{
-			tag->size += ft_putchar('0');
-			tag->zero -= 1;
-		}
-	}
-	while (tag->prec > 0)
-	{
-		tag->size += ft_putchar('0');
-		tag->prec -= 1;
-	}
-	while (*s)
-	{
-		tag->size += ft_putchar(*s);
+		tag -> size += ft_putchar(*s);
+		tag->prec--;
 		s++;
 	}
 }
 
-static void	ft_space(t_list *tag)
+static void	ft_space(char *s, t_list *tag)
 {
-	while (tag->width > 0)
+	while (tag->width)
 	{
 		tag->size += ft_putchar(' ');
 		tag->width -= 1;
 	}
 }
 
-int			ft_print_d(t_list *tag, va_list ap)
+int			ft_print_s(t_list *tag, va_list ap)
 {
-	int		n;
-	char	*s;
+	char	*str;
 
-	n = va_arg(ap, int);
-	if (tag->p_sign == EXEC && tag->prec == 0)
-	{
-		if(n == 0)
-		{
-			ft_space(tag);
-			return (SUCCESS);
-		}
-	}
-	s = ft_itoa(n);
-	s = ft_sign(n, s, tag);
-	ft_size_d(s, tag, n);
+	str = ft_strdup(va_arg(ap, char *));
+	ft_size_s(str, tag);
 	if (tag->left != EXEC)
-		ft_space(tag);
-	ft_print(s, tag);
+		ft_space(str, tag);
+	ft_print(str, tag);
 	if (tag->left == EXEC)
-		ft_space(tag);
-	free(s);
+		ft_space(str, tag);
+	free(str);
 	return (SUCCESS);
 }
