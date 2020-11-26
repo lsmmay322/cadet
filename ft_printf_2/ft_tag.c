@@ -12,14 +12,14 @@
 
 #include "ft_printf.h"
 
-void	ft_flag(char **format, t_list *tag)
+void	ft_flag(char **format, t_tag *tag)
 {
 	int res;
 
 	while (1)
 	{
 		res = ft_strchr_opt(**format, FLAG);
-		if (res == FAIL)
+		if (res == ERROR)
 			return ;
 		if (**format == '0')
 			tag->z_sign = EXEC;
@@ -37,7 +37,7 @@ void	ft_flag(char **format, t_list *tag)
 	}
 }
 
-void	ft_width(char **format, va_list ap, t_list *tag)
+void	ft_width(char **format, va_list ap, t_tag *tag)
 {
 	if (**format == '*')
 	{
@@ -53,7 +53,7 @@ void	ft_width(char **format, va_list ap, t_list *tag)
 		tag->width = ft_isnum(format);
 }
 
-void	ft_precision(char **format, va_list ap, t_list *tag)
+void	ft_precision(char **format, va_list ap, t_tag *tag)
 {
 	if (**format == '.')
 	{

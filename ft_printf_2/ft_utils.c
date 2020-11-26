@@ -12,18 +12,18 @@
 
 #include "ft_printf.h"
 
-int		ft_strchr_opt(char ch, char *str)
+int			ft_strchr_opt(char ch, char *str)
 {
 	while (*str)
 	{
-		if (ch == *str)
+		if (*str == ch)
 			return (SUCCESS);
 		str++;
 	}
-	return (FAIL);
+	return (ERROR);
 }
 
-int		ft_isnum(char **format)
+int			ft_isnum(char **format)
 {
 	int		res;
 
@@ -36,13 +36,13 @@ int		ft_isnum(char **format)
 	return (res);
 }
 
-int    ft_putchar(char ch)
+int			ft_putchar(char ch)
 {
-    write(1, &ch, 1);
+	write(1, &ch, 1);
 	return (1);
 }
 
-size_t	ft_strlen(const char *str)
+size_t		ft_strlen(const char *str)
 {
 	unsigned char	*cpy_str;
 	size_t			size;
@@ -57,7 +57,7 @@ size_t	ft_strlen(const char *str)
 	return (size);
 }
 
-static int	ft_getlen(int n)
+static int	ft_getlen(long long n)
 {
 	int size;
 
@@ -74,11 +74,11 @@ static int	ft_getlen(int n)
 	return (size + 1);
 }
 
-char		*ft_itoa(int n)
+char		*ft_itoa(long long n)
 {
 	int		size;
 	char	*str;
-	long	cpy_n;
+	long long	cpy_n;
 
 	cpy_n = n;
 	size = ft_getlen(n);
@@ -101,7 +101,7 @@ char		*ft_itoa(int n)
 	return (str);
 }
 
-char	*ft_strdup(const char *str)
+char		*ft_strdup(const char *str)
 {
 	int		i;
 	int		size;
@@ -120,7 +120,7 @@ char	*ft_strdup(const char *str)
 	return (dest);
 }
 
-char	*ft_strnjoin(char const *s1, char const *s2, int n)
+char		*ft_strnjoin(char const *s1, char const *s2, int n)
 {
 	int		size;
 	int		i;

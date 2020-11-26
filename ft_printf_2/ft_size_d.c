@@ -12,16 +12,16 @@
 
 #include "ft_printf.h"
 
-static void	ft_prec_d(t_list *tag, int size, int n)
+static void	ft_prec_d(t_tag *tag, int size, int n)
 {
 	tag->prec -= size;
 	tag->width = 0;
 	if (tag->p_sign == EXEC)
-		if (n < 0 || tag -> plus == EXEC)
+		if (n < 0 || tag->plus == EXEC)
 			tag->prec++;
 }
 
-static void	ft_width_d(t_list *tag, int size, int n)
+static void	ft_width_d(t_tag *tag, int size, long long n)
 {
 	int p_size;
 
@@ -42,7 +42,7 @@ static void	ft_width_d(t_list *tag, int size, int n)
 		tag->width -= 1;
 }
 
-void		ft_size_d(char *s, t_list *tag, int n)
+void		ft_size_d(char *s, t_tag *tag, long long n)
 {
 	int size;
 

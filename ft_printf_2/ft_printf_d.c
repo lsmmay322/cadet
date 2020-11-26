@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static char	*ft_sign(int n, char *s, t_list *tag)
+static char	*ft_sign(int n, char *s, t_tag *tag)
 {
 	if (tag->plus == EXEC)
 	{
@@ -27,7 +27,7 @@ static char	*ft_sign(int n, char *s, t_list *tag)
 	return (s);
 }
 
-static void	ft_print(char *s, t_list *tag)
+static void	ft_print(char *s, t_tag *tag)
 {
 	if (*s == '+' || *s == '-')
 		tag->size += ft_putchar(*s++);
@@ -51,7 +51,7 @@ static void	ft_print(char *s, t_list *tag)
 	}
 }
 
-static void	ft_space(t_list *tag)
+static void	ft_space(t_tag *tag)
 {
 	while (tag->width > 0)
 	{
@@ -60,7 +60,7 @@ static void	ft_space(t_list *tag)
 	}
 }
 
-int			ft_print_d(t_list *tag, va_list ap)
+int			ft_print_d(t_tag *tag, va_list ap)
 {
 	int		n;
 	char	*s;
@@ -68,7 +68,7 @@ int			ft_print_d(t_list *tag, va_list ap)
 	n = va_arg(ap, int);
 	if (tag->p_sign == EXEC && tag->prec == 0)
 	{
-		if(n == 0)
+		if (n == 0)
 		{
 			ft_space(tag);
 			return (SUCCESS);

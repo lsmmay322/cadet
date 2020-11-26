@@ -12,17 +12,17 @@
 
 #include "ft_printf.h"
 
-static void	ft_print(char *s, t_list *tag)
+static void	ft_print(char *s, t_tag *tag)
 {
 	while (*s)
 	{
-		tag -> size += ft_putchar(*s);
+		tag->size += ft_putchar(*s);
 		tag->prec--;
 		s++;
 	}
 }
 
-static void	ft_space(char *s, t_list *tag)
+static void	ft_space(char *s, t_tag *tag)
 {
 	while (tag->width)
 	{
@@ -31,13 +31,13 @@ static void	ft_space(char *s, t_list *tag)
 	}
 }
 
-static char	*ft_prec_str(char *str, t_list *tag)
+static char	*ft_prec_str(char *str, t_tag *tag)
 {
 	char *tmp;
 	char *res;
 
 	tmp = ft_strdup("");
-	while (tag->prec > 0)
+	while (tag->prec > 0 && *str)
 	{
 		tmp = ft_strnjoin(tmp, str, 1);
 		tag->prec--;
@@ -46,7 +46,7 @@ static char	*ft_prec_str(char *str, t_list *tag)
 	return (tmp);
 }
 
-int			ft_print_s(t_list *tag, va_list ap)
+int			ft_print_s(t_tag *tag, va_list ap)
 {
 	char	*str;
 

@@ -27,7 +27,7 @@
 #define WIDTH '*'
 #define PRECISION '.'
 
-typedef struct	s_list
+typedef struct	s_tag
 {
 	int	size;
 	int	left;
@@ -39,26 +39,32 @@ typedef struct	s_list
 	int	width;
 	int prec;
 	int p_sign;
-}				t_list;
+}				t_tag;
 
 int		ft_printf(const char *format, ...);
 
-void	ft_flag(char **format, t_list *tag);
-void	ft_width(char **format, va_list ap, t_list *tag);
-void	ft_precision(char **format, va_list ap, t_list *tag);
+void	ft_flag(char **format, t_tag *tag);
+void	ft_width(char **format, va_list ap, t_tag *tag);
+void	ft_precision(char **format, va_list ap, t_tag *tag);
 
 int		ft_strchr_opt(char ch, char *str);
 int		ft_isnum(char **format);
 int		ft_putchar(char ch);
 size_t	ft_strlen(const char *str);
-char	*ft_itoa(int n);
+char	*ft_itoa(long long n);
 char	*ft_strdup(const char *str);
 char	*ft_strnjoin(char const *s1, char const *s2, int n);
 
-int		ft_print_d(t_list *tag, va_list ap);
-int		ft_print_s(t_list *tag, va_list ap);
-int		ft_print_c(t_list *tag, va_list ap);
-void	ft_size_d(char *s, t_list *tag, int n);
-void	ft_size_s(char *s, t_list *tag);
+int		ft_print_d(t_tag *tag, va_list ap);
+int		ft_print_s(t_tag *tag, va_list ap);
+int		ft_print_c(t_tag *tag, va_list ap);
+int		ft_print_u(t_tag *tag, va_list ap);
+int		ft_print_x(t_tag *tag, va_list ap);
+int		ft_print_X(t_tag *tag, va_list ap);
+int		ft_print_p(t_tag *tag, va_list ap);
+int		ft_print_per(t_tag *tag);
+
+void	ft_size_d(char *s, t_tag *tag, long long n);
+void	ft_size_s(char *s, t_tag *tag);
 
 #endif

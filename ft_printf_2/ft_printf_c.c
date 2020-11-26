@@ -12,12 +12,12 @@
 
 #include "ft_printf.h"
 
-static void	ft_print(char s, t_list *tag)
+static void	ft_print(char s, t_tag *tag)
 {
-		tag -> size += ft_putchar(s);
+	tag->size += ft_putchar(s);
 }
 
-static void	ft_space(t_list *tag)
+static void	ft_space(t_tag *tag)
 {
 	if (tag->width != 0)
 		tag->width--;
@@ -28,7 +28,7 @@ static void	ft_space(t_list *tag)
 	}
 }
 
-int			ft_print_c(t_list *tag, va_list ap)
+int			ft_print_c(t_tag *tag, va_list ap)
 {
 	char	ch;
 

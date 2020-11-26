@@ -1,8 +1,14 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int main()
 {
-	printf("%1s\n", "abc");
-	printf("%.1s\n", "abc");
-	printf("%5.4s\n", "abcdef");
+	int *i;
+	int x = 2;
+	i = &x;
+	printf("%p\n", i);
+	printf("%x\n", i);
+	printf("%x\n", &x);
+	printf("%p\n", &x);
+	printf("%s", NULL);
 }

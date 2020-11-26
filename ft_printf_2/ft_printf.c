@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static void	ft_tag_init(t_list *tag)
+static void	ft_tag_init(t_tag *tag)
 {
 	tag->left = 0;
 	tag->plus = 0;
@@ -25,7 +25,7 @@ static void	ft_tag_init(t_list *tag)
 	tag->z_sign = 0;
 }
 
-static int	ft_specifier(char **format, t_list *tag, va_list ap)
+static int	ft_specifier(char **format, t_tag *tag, va_list ap)
 {
 	int res;
 
@@ -33,15 +33,24 @@ static int	ft_specifier(char **format, t_list *tag, va_list ap)
 		return (ERROR);
 	if (**format == 'd' || **format == 'i')
 		res = ft_print_d(tag, ap);
-	if (**format == 's')
+	else if (**format == 's')
 		res = ft_print_s(tag, ap);
-	if (**format == 'c')
+	else if (**format == 'c')
 		res = ft_print_c(tag, ap);
-
+	else if (**format == 'u')
+		res = ft_print_u(tag, ap);
+	else if (**format == 'x')
+		res = ft_print_x(tag, ap);
+	else if (**format == 'X')
+		res = ft_print_X(tag, ap);
+	else if (**format == 'p')
+		res = ft_print_p(tag, ap);
+	else if (**format == '%')
+		res = ft_print_per(tag);
 	return (res);
 }
 
-static int	ft_format_tag(char **format, t_list *tag, va_list ap)
+static int	ft_format_tag(char **format, t_tag *tag, va_list ap)
 {
 	if (**format == '\0')
 		return (ERROR);
@@ -56,17 +65,18 @@ static int	ft_format_tag(char **format, t_list *tag, va_list ap)
 		return (ERROR);
 	return (SUCCESS);
 }
-static int	ft_format(char *format, t_list *tag, va_list ap)
+
+static int	ft_format(char *format, t_tag *tag, va_list ap)
 {
-	char ch;
+	char	ch;
 
 	if (format == NULL)
 		return (ERROR);
-	tag -> size = 0;
+	tag->size = 0;
 	while (*format)
 	{
 		if (*format != '%')
-			tag->size +=ft_putchar(*format);
+			tag->size += ft_putchar(*format);
 		else
 		{
 			format++;
@@ -81,10 +91,10 @@ static int	ft_format(char *format, t_list *tag, va_list ap)
 	return (SUCCESS);
 }
 
-int	ft_printf(const char *format, ...)
+int			ft_printf(const char *format, ...)
 {
 	va_list	ap;
-	t_list	tag;
+	t_tag	tag;
 
 	va_start(ap, format);
 	if (ft_format((char *)format, &tag, ap) == ERROR)
