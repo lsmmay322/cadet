@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
- static char *ft_buff(char *str, int size)
+static char	*ft_buff(char *str, int size)
 {
 	int		i;
 	char	*buff;

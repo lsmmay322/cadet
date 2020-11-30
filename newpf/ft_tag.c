@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void	ft_flag(char **format, t_tag *tag)
+void		ft_flag(char **format, t_tag *tag)
 {
 	int res;
 
@@ -37,7 +37,7 @@ void	ft_flag(char **format, t_tag *tag)
 	}
 }
 
-void	ft_width(char **format, va_list ap, t_tag *tag)
+void		ft_width(char **format, va_list ap, t_tag *tag)
 {
 	if (**format == '*')
 	{
@@ -58,6 +58,7 @@ static void	ft_prze(t_tag *tag)
 	tag->prec = 0;
 	tag->p_sign = EXEC;
 }
+
 void		ft_precision(char **format, va_list ap, t_tag *tag)
 {
 	if (**format == '.')
@@ -75,7 +76,7 @@ void		ft_precision(char **format, va_list ap, t_tag *tag)
 				tag->p_sign = EXEC;
 			(*format)++;
 		}
-		else if(!(**format >= '0' && **format <='9'))
+		else if (!(**format >= '0' && **format <= '9'))
 			ft_prze(tag);
 		else
 		{

@@ -15,6 +15,7 @@ NAME = libftprintf.a
 CFALGS = -Wall -Werror -Wextra
 SRC = ft_printf.c ft_printf_d.c ft_utils.c ft_size_d.c \
 		ft_tag.c ft_printf_c.c ft_printf_s.c ft_printf_u.c\
+		ft_printf_x.c ft_printf_X.c ft_printf_p.c ft_printf_per.c
 
 OBJS = $(SRC:.c=.o)
 

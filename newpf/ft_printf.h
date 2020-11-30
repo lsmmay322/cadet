@@ -55,15 +55,17 @@ char	*ft_itoa(int n);
 char	*ft_strdup(const char *str);
 char	*ft_strnjoin(char const *s1, char const *s2, int n);
 char		*ft_u_itoa(long long n);
+char		*ft_hax(long long n, int op);
 
 int		ft_print_d(t_tag *tag, int n);
 int		ft_print_s(t_tag *tag, char *s);
 int		ft_print_c(t_tag *tag, char s);
 int		ft_print_u(t_tag *tag, unsigned int n);
-/*int		ft_print_per(t_tag *tag);
-int		ft_print_p(t_tag *tag, unsigned long n);
 int		ft_print_x(t_tag *tag, unsigned int n);
-int		ft_print_X(t_tag *tag, unsigned int n); */
+int		ft_print_X(t_tag *tag, unsigned int n);
+int		ft_print_p(t_tag *tag, unsigned long n);
+int		ft_print_per(t_tag *tag);
+
 
 void	ft_size_d(char *s, t_tag *tag, long long n);
 

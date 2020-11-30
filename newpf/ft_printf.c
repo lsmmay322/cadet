@@ -33,21 +33,20 @@ static int	ft_specifier(char **format, t_tag *tag, va_list ap)
 		return (ERROR);
 	if (**format == 'd' || **format == 'i')
 		res = ft_print_d(tag, va_arg(ap, int));
-  	if (**format == 's')
+	if (**format == 's')
 		res = ft_print_s(tag, va_arg(ap, char *));
 	if (**format == 'c')
 		res = ft_print_c(tag, (char)va_arg(ap, int));
-  	if (**format == 'u')
+	if (**format == 'u')
 		res = ft_print_u(tag, (unsigned int)va_arg(ap, int));
-/*	if (**format == 'p')
+ 	if (**format == 'x')
+		res = ft_print_x(tag, (unsigned int)va_arg(ap, int));
+	if (**format == 'X')
+		res = ft_print_X(tag, (unsigned int)va_arg(ap, int));
+	if (**format == 'p')
 		res = ft_print_p(tag, (unsigned long)va_arg(ap, void *));
  	if (**format == '%')
 		res = ft_print_per(tag);
- 	if (**format == 'x')
-		res = ft_print_c(tag, va_arg(ap, int));
- 	if (**format == 'X')
-		res = ft_print_c(tag, va_arg(ap, int)); */
-
 	return (res);
 }
 
