@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_d.c                                      :+:      :+:    :+:   */
+/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwalee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/15 16:14:41 by hwalee            #+#    #+#             */
-/*   Updated: 2020/11/21 13:10:54 by hwalee           ###   ########.fr       */
+/*   Created: 2020/12/01 19:39:42 by hwalee            #+#    #+#             */
+/*   Updated: 2020/12/01 19:39:52 by hwalee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-static void	ft_space(t_tag *tag)
+char		*ft_strnjoin(char const *s1, char const *s2, int n)
 {
-	while (tag->width - 1 > 0)
+	int		size;
+	int		i;
+	char	*str;
+
+	i = 0;
+	size = ft_strlen(s1) + n;
+	if (!(str = (char *)malloc(sizeof(char) * (size + 1))))
+		return (0);
+	while (*s1)
+		str[i++] = *s1++;
+	while (*s2 && n > 0)
 	{
-		tag->size += ft_putchar(' ');
-		tag->width--;
+		str[i++] = *s2++;
+		n--;
 	}
-}
-
-int			ft_print_c(t_tag *tag, char ch)
-{
-	if (tag->left != EXEC)
-		ft_space(tag);
-	tag->size += ft_putchar(ch);
-	if (tag->left == EXEC)
-		ft_space(tag);
-	return (SUCCESS);
+	str[i] = '\0';
+	return (str);
 }

@@ -12,6 +12,8 @@
 
 #include "ft_printf.h"
 
+#include "ft_printf.h"
+
 static void	ft_print(char *s, t_tag *tag)
 {
 	if (*s == '+' || *s == '-')
@@ -45,9 +47,10 @@ static void	ft_space(t_tag *tag)
 	}
 }
 
-int			ft_print_x(t_tag *tag, unsigned int n)
+int			ft_print_x(t_tag *tag, unsigned int n, char op)
 {
 	char	*s;
+	int		option;
 
 	if (tag->p_sign == EXEC && tag->prec == 0)
 	{
@@ -57,7 +60,8 @@ int			ft_print_x(t_tag *tag, unsigned int n)
 			return (SUCCESS);
 		}
 	}
-	if ((s = ft_hax(n, 1)) == 0)
+	option = (op == 'x') ? 1 : 2;
+	if ((s = ft_hax(n, option)) == 0)
 		return (ERROR);
 	ft_size_d(s, tag, n);
 	if (tag->left != EXEC)

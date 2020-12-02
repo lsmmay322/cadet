@@ -17,7 +17,7 @@ static char	*ft_sign(int n, char *s, t_tag *tag)
 	if (tag->plus == EXEC)
 	{
 		if (n >= 0)
-			s = ft_strnjoin("+", s, 1);
+			s = ft_strjoin("+", s);
 	}
 	else
 	{
@@ -60,17 +60,28 @@ static void	ft_space(t_tag *tag)
 	}
 }
 
+static void	ft_pfzero(t_tag *tag)
+{
+	if (tag->plus == EXEC || tag->space == EXEC)
+		tag->width--;
+	if (tag->left != EXEC)
+		ft_space(tag);
+	if (tag->plus == EXEC)
+		tag->size += ft_putchar('+');
+	else if (tag->space == EXEC)
+		tag->size += ft_putchar(' ');
+	if (tag->left == EXEC)
+		ft_space(tag);
+}
+
 int			ft_print_d(t_tag *tag, int n)
 {
 	char	*s;
 
-	if (tag->p_sign == EXEC && tag->prec == 0)
+	if (tag->p_sign == EXEC && tag->prec == 0 && n == 0)
 	{
-		if (n == 0)
-		{
-			ft_space(tag);
-			return (SUCCESS);
-		}
+		ft_pfzero(tag);
+		return (SUCCESS);
 	}
 	if ((s = ft_itoa(n)) == 0)
 		return (ERROR);

@@ -12,14 +12,16 @@
 
 #include "ft_printf.h"
 
-// 맥환경에서는 아마도 if((void *)n != NULL) 부분을 지워주면 될 것이다.
 static void	ft_print(char *s, t_tag *tag, unsigned long n)
 {
-	if ((void *)n != NULL)
-	{
-		tag->size += ft_putchar('0');
-		tag->size += ft_putchar('x');
-	}
+	tag->size += ft_putchar('0');
+	tag->size += ft_putchar('x');
+	if (tag->p_sign == EXEC)
+		while (tag->prec > 0)
+		{
+			tag->size += ft_putchar('0');
+			tag->prec--;
+		}
 	while (*s)
 	{
 		tag->size += ft_putchar(*s);
@@ -38,19 +40,17 @@ static void	ft_space(t_tag *tag)
 
 static void	ft_size_p(char *s, t_tag *tag, unsigned long n)
 {
-	if ((void *)n != NULL)
-	{
-		if (tag->width > (ft_strlen(s) + 2))
-			tag->width -= (ft_strlen(s) + 2);
-		else
-			tag->width = 0;
-	}
+	if (tag->width > (ft_strlen(s) + 2))
+		tag->width -= (ft_strlen(s) + 2);
 	else
+		tag->width = 0;
+	if (tag->p_sign == EXEC)
 	{
-		if (tag->width > ft_strlen(s))
-			tag->width -= ft_strlen(s);
+		if (tag->prec > ft_strlen(s))
+			tag->prec -= ft_strlen(s);
 		else
-			tag->width = 0;
+			tag->prec = 0;
+		tag->width -= tag->prec;
 	}
 }
 
@@ -64,11 +64,10 @@ int			ft_print_p(t_tag *tag, unsigned long n)
 	if ((void *)n == NULL)
 	{
 		free(s);
-/* 		if (tag->prec == 0)
+		if (tag->prec == 0 && tag->p_sign == EXEC)
 			s = ft_strdup("");
 		else
-			s = ft_strdup("0"); */
-		s = ft_strdup("(nil)");
+			s = ft_strdup("0");
 	}
 	ft_size_p(s, tag, n);
 	if (tag->left != EXEC)

@@ -41,7 +41,10 @@ static void	ft_print_space(t_tag *tag)
 {
 	while (tag->width > 0)
 	{
-		tag->size += ft_putchar(' ');
+		if (tag->z_sign != EXEC)
+			tag->size += ft_putchar(' ');
+		else if (tag->z_sign == EXEC && tag->left != EXEC)
+			tag->size += ft_putchar('0');
 		tag->width--;
 	}
 }
@@ -62,8 +65,8 @@ int			ft_print_s(t_tag *tag, char *s)
 
 	if (s == NULL)
 		s = "(null)";
-	if (s == "(null)" && tag->p_sign == EXEC)
-		size = (tag->prec < ft_strlen(s)) ? 0 : ft_strlen(s);
+	if (ft_strncmp(s, "(null)", 6) == 0 && tag->p_sign == EXEC)
+		size = (tag->prec < ft_strlen(s)) ? tag->prec : ft_strlen(s);
 	else if (tag->p_sign == EXEC)
 		size = (tag->prec <= ft_strlen(s)) ? tag->prec : ft_strlen(s);
 	else

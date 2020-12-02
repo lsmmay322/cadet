@@ -6,7 +6,7 @@
 /*   By: hwalee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/13 20:42:23 by hwalee            #+#    #+#             */
-/*   Updated: 2020/11/14 12:25:10 by hwalee           ###   ########.fr       */
+/*   Updated: 2020/12/01 19:51:05 by hwalee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		ft_flag(char **format, t_tag *tag)
 	while (1)
 	{
 		res = ft_strchr_opt(**format, FLAG);
-		if (res == ERROR)
+		if (res == FAIL)
 			return ;
 		if (**format == '0')
 			tag->z_sign = EXEC;

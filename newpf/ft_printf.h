@@ -6,7 +6,7 @@
 /*   By: hwalee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 11:43:21 by hwalee            #+#    #+#             */
-/*   Updated: 2020/11/16 18:02:10 by hwalee           ###   ########.fr       */
+/*   Updated: 2020/12/01 19:50:10 by hwalee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "libft/libft.h"
 
 #define ERROR -1
 #define SUCCESS 1
@@ -33,7 +34,6 @@ typedef struct	s_tag
 	int	left;
 	int	plus;
 	int	space;
-	int	shap;
 	int	zero;
 	int z_sign;
 	int	width;
@@ -50,22 +50,15 @@ void	ft_precision(char **format, va_list ap, t_tag *tag);
 int		ft_strchr_opt(char ch, char *str);
 int		ft_isnum(char **format);
 int		ft_putchar(char ch);
-size_t	ft_strlen(const char *str);
-char	*ft_itoa(int n);
-char	*ft_strdup(const char *str);
-char	*ft_strnjoin(char const *s1, char const *s2, int n);
-char		*ft_u_itoa(long long n);
-char		*ft_hax(long long n, int op);
 
 int		ft_print_d(t_tag *tag, int n);
 int		ft_print_s(t_tag *tag, char *s);
 int		ft_print_c(t_tag *tag, char s);
 int		ft_print_u(t_tag *tag, unsigned int n);
-int		ft_print_x(t_tag *tag, unsigned int n);
-int		ft_print_X(t_tag *tag, unsigned int n);
+int		ft_print_x(t_tag *tag, unsigned int n, char op);
 int		ft_print_p(t_tag *tag, unsigned long n);
 int		ft_print_per(t_tag *tag);
-
+int		ft_print_oct(t_tag *tag, unsigned int n);
 
 void	ft_size_d(char *s, t_tag *tag, long long n);
 

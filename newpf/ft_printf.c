@@ -6,7 +6,7 @@
 /*   By: hwalee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 11:33:22 by hwalee            #+#    #+#             */
-/*   Updated: 2020/11/16 18:07:15 by hwalee           ###   ########.fr       */
+/*   Updated: 2020/12/01 19:50:29 by hwalee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	ft_tag_init(t_tag *tag)
 	tag->left = 0;
 	tag->plus = 0;
 	tag->space = 0;
-	tag->shap = 0;
 	tag->zero = 0;
 	tag->width = 0;
 	tag->prec = 0;
@@ -39,13 +38,13 @@ static int	ft_specifier(char **format, t_tag *tag, va_list ap)
 		res = ft_print_c(tag, (char)va_arg(ap, int));
 	if (**format == 'u')
 		res = ft_print_u(tag, (unsigned int)va_arg(ap, int));
- 	if (**format == 'x')
-		res = ft_print_x(tag, (unsigned int)va_arg(ap, int));
-	if (**format == 'X')
-		res = ft_print_X(tag, (unsigned int)va_arg(ap, int));
+	if (**format == 'x' || **format == 'X')
+		res = ft_print_x(tag, (unsigned int)va_arg(ap, int), **format);
+	if (**format == 'o')
+		res = ft_print_oct(tag, (unsigned int)va_arg(ap, int));
 	if (**format == 'p')
 		res = ft_print_p(tag, (unsigned long)va_arg(ap, void *));
- 	if (**format == '%')
+	if (**format == '%')
 		res = ft_print_per(tag);
 	return (res);
 }
