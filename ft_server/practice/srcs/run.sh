@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# 권한설정
+chmod 775 /run.sh
+chown -R www-data:www-data /var/www/
+chmod -R 755 /var/www/
+
+openssl req -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=KR/ST=Seoul/L=Seoul/O=42Seoul/OU=Lee/CN=localhost" -keyout localhost.dev.key -out localhost.dev.crt
+mv localhost.dev.crt etc/ssl/certs/
+mv localhost.dev.key etc/ssl/private/
+chmod 600 etc/ssl/certs/localhost.dev.crt etc/ssl/private/localhost.dev.key
+
+cp -rp /tmp/default /etc/nginx/sites-available/
+
+# mariadb
+service mysql start
+echo "CREATE DATABASE IF NOT EXISTS wordpress;" \
+	| mysql -u root --skip-password
+echo "CREATE USER IF NOT EXISTS 'hwalee'@'localhost' IDENTIFIED BY 'Leehwanseob94!';" \
+	| mysql -u root --skip-password
+echo "GRANT ALL PRIVILEGES ON wordpress.* TO 'hwalee'@'localhost' WITH GRANT OPTION;" \
+	| mysql -u root --skip-password
+
+# phpmyadmin
+tar -xvf phpMyAdmin-5.0.2-all-languages.tar.gz
+mv phpMyAdmin-5.0.2-all-languages phpmyadmin
+mv phpmyadmin /var/www/html/
+cp -rp /tmp/config.inc.php var/www/html/phpmyadmin/
+mysql -u root --skip-password < var/www/html/phpmyadmin/sql/create_tables.sql
+
+# wordpress
+tar -xvf latest.tar.gz
+mv wordpress/ var/www/html/
+chown -R www-data:www-data /var/www/html/wordpress
+cp -rp /tmp/wp-config.php var/www/html/wordpress/
+
+service nginx reload
+service mysql restart
+service nginx start
+service php7.3-fpm start
+
+sed -i "/autoindex on;/autoindex ${AUTO};" /etc/nginx/sites-available/default
+
+bash
+
+while :
+do
+	sleep 1
+done
